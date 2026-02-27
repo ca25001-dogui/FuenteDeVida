@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="FuenteDeVida.BL/FuenteDeVida.BL.csproj" />
+  <Project Path="FuenteDeVida.DAL/FuenteDeVida.DAL.csproj" />
+  <Project Path="FuenteDeVida/FuenteDeVida.EN.csproj" />
+</Solution>
