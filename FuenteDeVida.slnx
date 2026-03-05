@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="FuenteDeVida.BL/FuenteDeVida.BL.csproj" />
   <Project Path="FuenteDeVida.DAL/FuenteDeVida.DAL.csproj" />
+  <Project Path="FuenteDeVida.UI.WebAppAspCore/FuenteDeVida.UI.WebAppAspCore.csproj" Id="a089e08f-8436-4f02-ade6-89bd5fdbab72" />
   <Project Path="FuenteDeVida/FuenteDeVida.EN.csproj" />
 </Solution>
