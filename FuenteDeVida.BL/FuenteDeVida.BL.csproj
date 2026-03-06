@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FuenteDeVida.DAL\FuenteDeVida.DAL.csproj" />
+    <ProjectReference Include="..\FuenteDeVida\FuenteDeVida.EN.csproj" />
+  </ItemGroup>
+
 </Project>
