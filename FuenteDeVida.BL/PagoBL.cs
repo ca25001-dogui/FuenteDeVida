@@ -8,28 +8,31 @@ namespace FuenteDeVida.BL
 {
     public class PagoBL
     {
-        public int Guardar(PagoBL pPago)
+        public async Task<int> CrearAsync(Pago pPago)
         {
-            return PagoDAL.Guardar(pPago);
+            return await PagoDAL.CrearAsync(pPago);
         }
-        public int Modificar(PagoBL pPago)
+        public async Task<int> ModificarAsync(Pago pPago)
         {
-            return PagoDAL.Modificar(pPago);
-        }
-
-        public int Eliminar(PagoBL pPago)
-        {
-            return PagoDAL.Eliminar(pPago);
+            return await PagoDAL.ModificarAsync(pPago);
         }
 
-        public int ObtenerPorId(long pIdPago)
+        public async Task<int> EliminarAsync(Pago pPago)
         {
-            return PagoDAL.ObtenerPorId(pIdPago);
+            return await PagoDAL.EliminarAsync(pPago);
         }
 
-        public int List<Pago> Buscar(Pago pPago)
+        public async Task<Pago> ObtenerPorIdAsync(Pago pPago)
         {
-            return PagoDAL.Buscar(pPago);
+            return await PagoDAL.ObtenerPorIdAsync(pPago);
+        }
+        public async Task<List<Pago>> ObtenerTodosAsync()
+        {
+            return await PagoDAL.ObtenerTodosAsync();
+        }
+        public async Task<List<Pago>> BuscarAsync(Pago pPago)
+        {
+            return await PagoDAL.BuscarAsync(pPago);
         }
     }
 }

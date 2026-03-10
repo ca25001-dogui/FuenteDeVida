@@ -9,28 +9,32 @@ namespace FuenteDeVida.BL
 {
     public class MultaBL
     {
-        public int Guardar(MultaBL pMulta)
+        public async Task<int> CrearAsync(Multa pMulta)
         {
-            return MultaDAL.Guardar(pMulta);
+            return await MultaDAL.CrearAsync(pMulta);
         }
-        public int Modificar(MultaBL pMulta)
+        public async Task<int> Modificar(Multa pMulta)
         {
-            return MultaDAL.Modificar(pMulta);
-        }
-
-        public int Eliminar(MultaBL pMulta)
-        {
-            return MultaDAL.Eliminar(pMulta);
+            return await MultaDAL.ModificarAsync(pMulta);
         }
 
-        public int ObtenerPorId(long pIdMulta)
+        public async Task<int> EliminarAsync(Multa pMulta)
         {
-            return MultaDAL.ObtenerPorId(pIdMulta);
+            return await MultaDAL.EliminarAsync(pMulta);
         }
 
-        public int List<Multa> Buscar(Multa pMulta)
+        public async Task<Multa> ObtenerPorIdAsync(Multa pMulta)
         {
-            return MultaDAL.Buscar(pMulta);
+            return await MultaDAL.ObtenerPorIdAsync(pMulta);
+        }
+        public async Task<List<Multa>> ObtenerTodosAsync()
+        {
+            return await MultaDAL.ObtenerTodosAsync();
+        }
+
+        public async Task<List<Multa>> BuscarAsync(Multa pMulta)
+        {
+            return await MultaDAL.BuscarAsync(pMulta);
         }
     }
 }
