@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace FuenteDeVida.EN
 {
-    internal class Usuario
+   public class Usuario
     {
+        public int IdUsuario { get; set; }
+        public string Nombre { get; set; } = string.Empty;
+        public string Apellido {  get; set; } = string.Empty;
+        public string Correo {  get; set; } = string.Empty;
+        public string Clave {  get; set; } = string.Empty;
+
+        //Llave foranea hacia Administrador 
+        public int IdRol {  get; set; }
+        public virtual Rol Rol { get; set; } = new Rol();
     }
 }

@@ -6,10 +6,11 @@ using FuenteDeVida.DAL;
 using FuenteDeVida.EN;
 using System.Collections.Generic;
 using System.Text;
+using global::FuenteDeVida.EN;
 
 namespace FuenteDeVida.BL
 {
-    public class RolBL
+    public class UsuarioBL
     {
         private static string CifrarSha256(string pTexto)
         {
@@ -29,6 +30,24 @@ namespace FuenteDeVida.BL
         }
 
         public int Guardar(Usuario pUsuario)
-        
+        {
+            pUsuario.Clave = CifrarSha256(pUsuario.Clave); //Encriptar la Clave
+            return UsuarioDAL.Guardar(pUsuario);
+        }
+
+        public int Eliminar(UsuarioBL pUsuario)
+        {
+            return UsuarioDAL.Eliminar(pUsuario);
+        }
+
+        public UsuarioBL ObtenerPorId(short pIdUsuario)
+        {
+            return UsuarioDAL.ObtenerPorId(pIdUsuario);
+        }
+
+        public List<Usuario> Buscar(Usuario pUsuario)
+        {
+            return UsuarioDAL.Buscar(pUsuario);
+        }
     }
 }
