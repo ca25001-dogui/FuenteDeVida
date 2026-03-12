@@ -16,6 +16,6 @@ namespace FuenteDeVida.EN
         public DateTime FechaLimite { get; set; }
 
         [NotMapped]
-        public int TopAux { get; set; }
+        public int Top_Aux { get; set; }
     }
 }
