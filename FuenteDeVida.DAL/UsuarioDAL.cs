@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FuenteDeVida.DAL
 {
-    internal class UsuarioDAL
+    public class UsuarioDAL
     {
     }
 }

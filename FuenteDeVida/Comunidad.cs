@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,5 +14,8 @@ namespace FuenteDeVida.EN
         public decimal Monto { get; set; }
         public string TipoServicio { get; set; }
         public DateTime FechaLimite { get; set; }
+
+        [NotMapped]
+        public int TopAux { get; set; }
     }
 }

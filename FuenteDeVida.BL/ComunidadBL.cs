@@ -1,34 +1,39 @@
-﻿using SistemaContabilidad.DAL;
-using SistemaContabilidad.EN;
-using System.Collections.Generic;
+﻿//Referencias
+using System.Security.Cryptography;
+// Referencias del proyecto
+using FuenteDeVida.EN;
+using FuenteDeVida.DAL;
+using System.Net.Sockets;
 
 namespace SistemaContabilidad.BL
 {
     public class ComunidadBL
     {
-        public int Guardar(Comunidad pComunidad)
+        public async Task<int> CrearAsync(Comunidad pComunidad)
         {
-            return ComunidadDAL.Guardar(pComunidad);
+            return await ComunidadDAL.CrearAsync(pComunidad);
+        }
+        public async Task<int> ModificarAsync(Comunidad pComunidad)
+        {
+            return await ComunidadDAL.ModificarAsync(pComunidad);
         }
 
-        public int Modificar(Comunidad pComunidad)
+        public async Task<int> EliminarAsync(Comunidad pComunidad)
         {
-            return ComunidadDAL.Modificar(pComunidad);
+            return await ComunidadDAL.EliminarAsync(pComunidad);
         }
 
-        public int Eliminar(Comunidad pComunidad)
+        public async Task<Comunidad> ObtenerPorIdAsync(Comunidad pComunidad)
         {
-            return ComunidadDAL.Eliminar(pComunidad);
+            return await ComunidadDAL.ObtenerPorIdAsync(pComunidad);
         }
-
-        public Comunidad ObtenerPorId(int pIdComunidad)
+        public async Task<List<Comunidad>> ObtenerTodosAsync()
         {
-            return ComunidadDAL.ObtenerPorId(pIdComunidad);
+            return await ComunidadDAL.ObtenerTodosAsync();
         }
-
-        public List<Comunidad> Buscar(Comunidad pComunidad)
+        public async Task<List<Comunidad>> BuscarAsync(Comunidad pComunidad)
         {
-            return ComunidadDAL.Buscar(pComunidad);
+            return await ComunidadDAL.BuscarAsync(pComunidad);
         }
     }
 }

@@ -1,34 +1,39 @@
-﻿using FuenteDeVida.DAL;
+﻿//Referencias
+using System.Security.Cryptography;
+// Referencias del proyecto
 using FuenteDeVida.EN;
-using System.Collections.Generic;
+using FuenteDeVida.DAL;
+using System.Net.Sockets;
 
 namespace FuenteDeVida.BL
 {
     public class RolBL
     {
-        public int Guardar(RolBL pRol)
+        public async Task<int> CrearAsync(Rol pRol)
         {
-            return RolDAL.Rol(pRol);
+            return await RolDAL.CrearAsync(pRol);
+        }
+        public async Task<int> ModificarAsync(Rol pRol)
+        {
+            return await RolDAL.ModificarAsync(pRol);
         }
 
-        public int Modificar(RolBL pRol)
+        public async Task<int> EliminarAsync(Rol pRol)
         {
-            return RolDAL.Modificar(pRol);
+            return await RolDAL.EliminarAsync(pRol);
         }
 
-        public int Eliminar(RolBL pRol)
+        public async Task<Rol> ObtenerPorIdAsync(Rol pRol)
         {
-            return RolDAL.Eliminar(pRol);
+            return await RolDAL.ObtenerPorIdAsync(pRol);
         }
-
-        public Rol ObtenerPorId(short pIdRol)
+        public async Task<List<Rol>> ObtenerTodosAsync()
         {
-            return RolDAL.ObtenerPorId(pIdRol);
+            return await RolDAL.ObtenerTodosAsync();
         }
-
-        public List<Rol> Buscar(RolBL pRol)
+        public async Task<List<Rol>> BuscarAsync(Rol pRol)
         {
-            return RolDAL.Buscar(pRol);
+            return await RolDAL.BuscarAsync(pRol);
         }
     }
 

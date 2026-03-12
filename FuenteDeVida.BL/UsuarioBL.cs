@@ -1,12 +1,10 @@
-﻿namespace FuenteDeVida.BL
-//Referencias
+﻿//Referencias
 using System.Security.Cryptography;
 // Referencias del proyecto
-using FuenteDeVida.DAL;
 using FuenteDeVida.EN;
-using System.Collections.Generic;
-using System.Text;
-using global::FuenteDeVida.EN;
+using FuenteDeVida.DAL;
+using System.Net.Sockets;
+
 
 namespace FuenteDeVida.BL
 {
@@ -35,19 +33,27 @@ namespace FuenteDeVida.BL
             return UsuarioDAL.Guardar(pUsuario);
         }
 
-        public int Eliminar(UsuarioBL pUsuario)
+        public async Task<int> ModificarAsync(Usuario pUsuario)
         {
-            return UsuarioDAL.Eliminar(pUsuario);
+            return await UsuarioDAL.ModificarAsync(pUsuario);
         }
 
-        public UsuarioBL ObtenerPorId(short pIdUsuario)
+        public async Task<int> EliminarAsync(Usuario pUsuario)
         {
-            return UsuarioDAL.ObtenerPorId(pIdUsuario);
+            return await UsuarioDAL.EliminarAsync(pUsuario);
         }
 
-        public List<Usuario> Buscar(Usuario pUsuario)
+        public async Task<Usuario> ObtenerPorIdAsync(Usuario pUsuario)
         {
-            return UsuarioDAL.Buscar(pUsuario);
+            return await UsuarioDAL.ObtenerPorIdAsync(pUsuario);
+        }
+        public async Task<List<Usuario>> ObtenerTodosAsync()
+        {
+            return await UsuarioDAL.ObtenerTodosAsync();
+        }
+        public async Task<List<Usuario>> BuscarAsync(Usuario pUsuario)
+        {
+            return await UsuarioDAL.BuscarAsync(pUsuario);
         }
     }
 }
