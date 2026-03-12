@@ -1,35 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿      //Referencias
+using System.Security.Cryptography;
+// Referencias del proyecto
+using FuenteDeVida.EN;
+using FuenteDeVida.DAL;
+using System.Net.Sockets;
 namespace FuenteDeVida.BL
-{
-    public class FacturaBL
     {
-        public int Guardar(Factura pFactura)
+        public class FacturaBL
         {
-            return FacturaDAL.Guardar(pFactura);
-        }
-        public int Modificar(Factura pFactura)
-        {
-            return FacturaDAL.Modificar(pFactura);
-        }
+            public async Task<int> CrearAsync(Factura pFactura)
+            {
+                return await FacturaDAL.CrearAsync(pFactura);
+            }
+            public async Task<int> ModificarAsync(Factura pFactura)
+            {
+                return await FacturaDAL.ModificarAsync(pFactura);
+            }
 
-        public int Eliminar(Factura pFactura)
-        {
-            return FacturaDAL.Eliminar(pFactura);
-        }
+            public async Task<int> EliminarAsync(Factura pFactura)
+            {
+                return await FacturaDAL.EliminarAsync(pFactura);
+            }
 
-        public Factura ObtenerPorId(long pIdFactura)
-        {
-            return FacturaDAL.ObtenerPorId(pIdFactura);
-        }
-        public List<Factura> Buscar(Factura pFactura)
-        {
-            return FacturaDAL.Buscar(pFactura);
+            public async Task<Pago> ObtenerPorIdAsync(Factura pFactura)
+            {
+                return await FacturaDAL.ObtenerPorIdAsync(pFactura);
+            }
+            public async Task<List<Pago>> ObtenerTodosAsync()
+            {
+                return await FacturaDAL.ObtenerTodosAsync();
+            }
+            public async Task<List<Pago>> BuscarAsync(Factura pFactura)
+            {
+                return await FacturaDAL.BuscarAsync(pFactura);
+            }
         }
     }
-}
+
+
        
