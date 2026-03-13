@@ -9,9 +9,9 @@ namespace FuenteDeVida.EN
 {
     public class Factura
     {
+
         public int IdFactura { get; set; }
 
-       
         public DateTime FechaEmision { get; set; }
         public decimal Total { get; set; }
 
@@ -19,13 +19,12 @@ namespace FuenteDeVida.EN
         public int TopAux { get; set; }
 
         // Llave foránea Usuario
-        public int IdUsuaruio { get; set; }
+        public int IdUsuario { get; set; }
         public virtual Usuario Usuario { get; set; } = new Usuario();
 
         // Llave foránea Comunidad
         public int IdComunidad { get; set; }
         public virtual Comunidad Comunidad { get; set; } = new Comunidad();
-
 
     }
 

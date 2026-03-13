@@ -20,18 +20,18 @@ namespace FuenteDeVida.BL
 
         public async Task<int> EliminarAsync(Cuota pCuota)
         {
-            return await CuotaDAL.EliminarAsync(pRol);
+            return await CuotaDAL.EliminarAsync(pCuota);
         }
 
-        public async Task<Rol> ObtenerPorIdAsync(Cuota pCuota)
+        public async Task<Cuota> ObtenerPorIdAsync(Cuota pCuota)
         {
             return await CuotaDAL.ObtenerPorIdAsync(pCuota);
         }
-        public async Task<List<Rol>> ObtenerTodosAsync()
+        public async Task<List<Cuota>> ObtenerTodosAsync()
         {
             return await CuotaDAL.ObtenerTodosAsync();
         }
-        public async Task<List<Rol>> BuscarAsync(Cuota pCuota)
+        public async Task<List<Cuota>> BuscarAsync(Cuota pCuota)
         {
             return await CuotaDAL.BuscarAsync(pCuota);
         }

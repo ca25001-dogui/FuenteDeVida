@@ -22,15 +22,15 @@ namespace FuenteDeVida.BL
                 return await FacturaDAL.EliminarAsync(pFactura);
             }
 
-            public async Task<Pago> ObtenerPorIdAsync(Factura pFactura)
+            public async Task<Factura> ObtenerPorIdAsync(Factura pFactura)
             {
                 return await FacturaDAL.ObtenerPorIdAsync(pFactura);
             }
-            public async Task<List<Pago>> ObtenerTodosAsync()
+            public async Task<List<Factura>> ObtenerTodosAsync()
             {
                 return await FacturaDAL.ObtenerTodosAsync();
             }
-            public async Task<List<Pago>> BuscarAsync(Factura pFactura)
+            public async Task<List<Factura>> BuscarAsync(Factura pFactura)
             {
                 return await FacturaDAL.BuscarAsync(pFactura);
             }
