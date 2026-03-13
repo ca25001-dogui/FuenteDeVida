@@ -11,9 +11,7 @@ namespace FuenteDeVida.EN
     {
         public int IdFactura { get; set; }
 
-        public int IdUsuario { get; set; }
-        public int IdComunidad { get; set; }
-
+       
         public DateTime FechaEmision { get; set; }
         public decimal Total { get; set; }
 

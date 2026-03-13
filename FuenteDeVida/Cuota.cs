@@ -11,8 +11,6 @@ namespace FuenteDeVida.EN
     {
         public int IdCuota { get; set; }
 
-        public int IdComunidad { get; set; }
-
         public decimal Monto { get; set; }
         public string TipoServicio { get; set; } = string.Empty;
         public DateTime FechaLimite { get; set; }
