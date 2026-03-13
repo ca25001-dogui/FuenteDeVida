@@ -13,7 +13,7 @@ namespace FuenteDeVida.EN
         public string NombreRol { get; set; } = string.Empty;
 
         [NotMapped]
-        public int TopAux { get; set; }
+        public int Top_Aux { get; set; }
 
     }
 }

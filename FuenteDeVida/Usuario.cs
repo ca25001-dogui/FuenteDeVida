@@ -16,7 +16,7 @@ namespace FuenteDeVida.EN
         public string Clave {  get; set; } = string.Empty;
 
         [NotMapped]
-        public int TopAux { get; set; }
+        public int Top_Aux { get; set; }
 
         //Llave foranea hacia Administrador 
         public int IdRol {  get; set; }

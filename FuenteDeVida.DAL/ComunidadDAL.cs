@@ -68,7 +68,7 @@ namespace FuenteDeVida.DAL
             if (pComunidad.IdComunidad > 0)
                 pQuery = pQuery.Where(s => s.IdComunidad == pComunidad.IdComunidad);
             if (!string.IsNullOrWhiteSpace(pComunidad.))
-                pQuery = pQuery.Where(s => s.Monto.Contains(pComunidad.Monto));
+                pQuery = pQuery.Where(s => s.TipoServicio.Contains(pComunidad.TipoServicio));
             pQuery = pQuery.OrderByDescending(s => s.IdComunidad).AsQueryable();
             if (pComunidad.Top_Aux > 0)
                 pQuery = pQuery.Take(pComunidad.Top_Aux).AsQueryable();
@@ -77,9 +77,9 @@ namespace FuenteDeVida.DAL
         public static async Task<List<Comunidad>> BuscarAsync(Comunidad pComunidad)
         {
             var comunidades = new List<Comunidad>();
-            using (var dbContexto = new DBContexto())
+            using (var bdContexto = new BDContexto())
             {
-                var select = dbContexto.Monto.AsQueryable();
+                var select = bdContexto.Comunidad.AsQueryable();
                 select = QuerySelect(select, pComunidad);
                 comunidades = await select.ToListAsync();
             }
