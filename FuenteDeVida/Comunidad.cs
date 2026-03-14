@@ -11,9 +11,9 @@ namespace FuenteDeVida.EN
     public class Comunidad
     {
         public int IdComunidad {  get; set; }
-        public decimal Monto { get; set; }
-        public string TipoServicio { get; set; }
-        public DateTime FechaLimite { get; set; }
+        public string Nombre { get; set; }
+        public string Direccion { get; set; }
+        public int CantidadUsuario { get; set; }
 
         [NotMapped]
         public int Top_Aux { get; set; }

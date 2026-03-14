@@ -27,7 +27,7 @@ namespace FuenteDeVida.DAL
             using (var bdContexto = new BDContexto())
             {
                 var comunidad = await bdContexto.Comunidad.FirstOrDefaultAsync(s => s.IdComunidad == pComunidad.IdComunidad);
-                comunidad.Monto = pComunidad.Monto;
+                comunidad.CantidadUsuario = pComunidad.CantidadUsuario;
                 bdContexto.Update(comunidad);
                 result = await bdContexto.SaveChangesAsync();
             }
@@ -67,8 +67,8 @@ namespace FuenteDeVida.DAL
         {
             if (pComunidad.IdComunidad > 0)
                 pQuery = pQuery.Where(s => s.IdComunidad == pComunidad.IdComunidad);
-            if (!string.IsNullOrWhiteSpace(pComunidad.))
-                pQuery = pQuery.Where(s => s.TipoServicio.Contains(pComunidad.TipoServicio));
+            if (pComunidad.CantidadUsuario > 0)
+                pQuery = pQuery.Where(s => s.CantidadUsuario == pComunidad.CantidadUsuario);
             pQuery = pQuery.OrderByDescending(s => s.IdComunidad).AsQueryable();
             if (pComunidad.Top_Aux > 0)
                 pQuery = pQuery.Take(pComunidad.Top_Aux).AsQueryable();
