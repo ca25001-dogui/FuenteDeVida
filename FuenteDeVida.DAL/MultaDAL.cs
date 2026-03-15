@@ -28,7 +28,7 @@ namespace FuenteDeVida.DAL
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var multa = await bdContexto.Multa.FirstOrDefaultAsync(s => s.Id == pMulta.Id);
+                var multa = await bdContexto.Multa.FirstOrDefaultAsync(s => s.IdMulta == pMulta.IdMulta);
                 multa.Monto = pMulta.Monto;
                 bdContexto.Update(multa);
                 result = await bdContexto.SaveChangesAsync();
@@ -40,7 +40,7 @@ namespace FuenteDeVida.DAL
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var multa = await bdContexto.Multa.FirstOrDefaultAsync(s => s.Id == pMulta.Id);
+                var multa = await bdContexto.Multa.FirstOrDefaultAsync(s => s.IdMulta == pMulta.IdMulta);
                 bdContexto.Multa.Remove(multa);
                 result = await bdContexto.SaveChangesAsync();
             }
@@ -51,7 +51,7 @@ namespace FuenteDeVida.DAL
             var multa = new Multa();
             using (var bdContexto = new BDContexto())
             {
-                multa = await bdContexto.Multa.FirstOrDefaultAsync(s => s.Id == pMulta.Id);
+                multa = await bdContexto.Multa.FirstOrDefaultAsync(s => s.IdMulta == pMulta.IdMulta);
             }
             return multa;
         }
@@ -67,11 +67,11 @@ namespace FuenteDeVida.DAL
         internal static IQueryable<Multa> QuerySelect(IQueryable<Multa> pQuery
            , Multa pMulta)
         {
-            if (pMulta.Id > 0)
-                pQuery = pQuery.Where(s => s.Id == pMulta.Id);//Where Id = 1
-            if (!string.IsNullOrWhiteSpace(pMulta.))
-                pQuery = pQuery.Where(s => s.Monto.Contains(pMulta.Monto));//Where Nombre like '%A%'
-            pQuery = pQuery.OrderByDescending(s => s.Id).AsQueryable();//Order by Id Desc
+            if (pMulta.IdMulta > 0)
+                pQuery = pQuery.Where(s => s.IdMulta == pMulta.IdMulta);
+            if (pMulta.Monto > 0)
+                pQuery = pQuery.Where(s => s.Monto == pMulta.Monto);
+            pQuery = pQuery.OrderByDescending(s => s.IdMulta).AsQueryable();
             if (pMulta.Top_Aux > 0)
                 pQuery = pQuery.Take(pMulta.Top_Aux).AsQueryable();
             return pQuery;
@@ -79,7 +79,7 @@ namespace FuenteDeVida.DAL
         public static async Task<List<Multa>> BuscarAsync(Multa pMulta)
         {
             var multas = new List<Multa>();
-            using (var dbContexto = new DBContexto())
+            using (var dbContexto = new BDContexto())
             {
                 var select = dbContexto.Multa.AsQueryable();
                 select = QuerySelect(select, pMulta);

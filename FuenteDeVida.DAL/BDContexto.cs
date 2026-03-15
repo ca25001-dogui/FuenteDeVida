@@ -23,7 +23,7 @@ namespace FuenteDeVida.DAL
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"");
+            optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-OH8ATN9D;Initial Catalog=SistemaDeAgua;Integrated Security=True;Trust Server Certificate=True");
         }
     }
 }

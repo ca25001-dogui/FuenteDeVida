@@ -30,7 +30,7 @@ namespace FuenteDeVida.DAL
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var pago = await bdContexto.Pago.FirstOrDefaultAsync(s => s.Id == pPago.Id);
+                var pago = await bdContexto.Pago.FirstOrDefaultAsync(s => s.IdPago == pPago.IdPago);
                 pago.MontoTotal = pPago.MontoTotal;
                 bdContexto.Update(pago);
                 result = await bdContexto.SaveChangesAsync();
@@ -42,7 +42,7 @@ namespace FuenteDeVida.DAL
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var pago = await bdContexto.Pago.FirstOrDefaultAsync(s => s.Id == pPago.Id);
+                var pago = await bdContexto.Pago.FirstOrDefaultAsync(s => s.IdPago == pPago.IdPago);
                 bdContexto.Pago.Remove(pago);
                 result = await bdContexto.SaveChangesAsync();
             }
@@ -53,7 +53,7 @@ namespace FuenteDeVida.DAL
             var pago = new Pago();
             using (var bdContexto = new BDContexto())
             {
-                pago = await bdContexto.Pago.FirstOrDefaultAsync(s => s.Id == pPago.Id);
+                pago = await bdContexto.Pago.FirstOrDefaultAsync(s => s.IdPago == pPago.IdPago);
             }
             return pago;
         }
@@ -69,11 +69,11 @@ namespace FuenteDeVida.DAL
         internal static IQueryable<Pago> QuerySelect(IQueryable<Pago> pQuery
            , Pago pPago)
         {
-            if (pPago.Id > 0)
-                pQuery = pQuery.Where(s => s.Id == pPago.Id);
-            if (!string.IsNullOrWhiteSpace(pPago.))
-                pQuery = pQuery.Where(s => s.MontoTotal.Contains(pPago.MontoTotal));
-            pQuery = pQuery.OrderByDescending(s => s.Id).AsQueryable();
+            if (pPago.IdPago > 0)
+                pQuery = pQuery.Where(s => s.IdPago == pPago.IdPago);
+            if (pPago.MontoTotal > 0)
+                pQuery = pQuery.Where(s => s.MontoTotal == pPago.MontoTotal);
+            pQuery = pQuery.OrderByDescending(s => s.IdPago).AsQueryable();
             if (pPago.Top_Aux > 0)
                 pQuery = pQuery.Take(pPago.Top_Aux).AsQueryable();
             return pQuery;
@@ -81,9 +81,9 @@ namespace FuenteDeVida.DAL
         public static async Task<List<Pago>> BuscarAsync(Pago pPago)
         {
             var pagos = new List<Pago>();
-            using (var dbContexto = new DBContexto())
+            using (var bdContexto = new BDContexto())
             {
-                var select = dbContexto.Multa.AsQueryable();
+                var select = bdContexto.Pago.AsQueryable();
                 select = QuerySelect(select, pPago);
                 pagos = await select.ToListAsync();
             }

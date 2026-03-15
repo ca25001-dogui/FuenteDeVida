@@ -10,14 +10,17 @@ namespace FuenteDeVida.EN
     public class Multa
     {
         
-        public int Id { get; set; }
-
-        public int IdComunidad { get; set; }
+        public int IdMulta { get; set; }
 
         public decimal Monto { get; set; }    
         public DateTime FechaDeVencimiento { get; set; }
 
         [NotMapped]
-        public int TopAux { get; set; }
+        public int Top_Aux { get; set; }
+
+        //LLave foranea 
+        public int IdComunidad { get; set; }
+
+        public virtual Comunidad Comunidad { get; set; } = new Comunidad();
     }
 }
