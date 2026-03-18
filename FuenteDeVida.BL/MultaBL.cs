@@ -36,5 +36,10 @@ namespace FuenteDeVida.BL
         {
             return await MultaDAL.BuscarAsync(pMulta);
         }
+
+        public async Task<int> ModificarAsync(Multa pMulta)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
