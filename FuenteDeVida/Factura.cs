@@ -16,7 +16,7 @@ namespace FuenteDeVida.EN
         public decimal Total { get; set; }
 
         [NotMapped]
-        public int TopAux { get; set; }
+        public int Top_Aux { get; set; }
 
         // Llave foránea Usuario
         public int IdUsuario { get; set; }
