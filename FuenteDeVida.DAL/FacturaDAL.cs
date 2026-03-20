@@ -91,8 +91,8 @@ namespace FuenteDeVida.DAL
 
                 pQuery = pQuery.OrderByDescending(s => s.IdFactura).AsQueryable();
 
-                if (pFactura.TopAux > 0)
-                    pQuery = pQuery.Take(pFactura.TopAux).AsQueryable();
+                if (pFactura.Top_Aux > 0)
+                    pQuery = pQuery.Take(pFactura.Top_Aux).AsQueryable();
 
                 return pQuery;
             }

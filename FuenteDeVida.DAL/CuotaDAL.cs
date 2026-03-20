@@ -88,8 +88,8 @@ namespace FuenteDeVida.DAL
 
             pQuery = pQuery.OrderByDescending(s => s.IdCuota).AsQueryable();
 
-            if (pCuota.TopAux > 0)
-                pQuery = pQuery.Take(pCuota.TopAux).AsQueryable();
+            if (pCuota.Top_Aux > 0)
+                pQuery = pQuery.Take(pCuota.Top_Aux).AsQueryable();
 
             return pQuery;
         }
