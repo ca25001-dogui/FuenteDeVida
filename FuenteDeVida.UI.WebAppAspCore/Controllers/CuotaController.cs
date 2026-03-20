@@ -1,82 +1,112 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+/***************************/
+using FuenteDeVida.EN;
+using FuenteDeVida.BL;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace FuenteDeVida.UI.WebAppAspCore.Controllers
 {
+    //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
+
+
     public class CuotaController : Controller
     {
+        CuotaBL cuotaBL = new CuotaBL();
+
         // GET: CuotaController
-        public ActionResult Index()
+        public async Task<IActionResult> Index(Cuota pCuota = null)
         {
-            return View();
+            if (pCuota == null)
+                pCuota = new Cuota();
+            if (pCuota.Top_Aux == 0)
+                pCuota.Top_Aux = 10;
+            else if (pCuota.Top_Aux == -1)
+                pCuota.Top_Aux = 0;
+
+            var cuotas = await cuotaBL.BuscarAsync(pCuota);
+            ViewBag.Top = pCuota.Top_Aux;
+            return View(cuotas);
         }
 
         // GET: CuotaController/Details/5
-        public ActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
-            return View();
+            var cuota = await cuotaBL.ObtenerPorIdAsync(new Cuota { IdCuota = id });
+            return View(cuota);
         }
 
         // GET: CuotaController/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
+            ViewBag.Error = "";
             return View();
         }
 
         // POST: CuotaController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<IActionResult> Create(Cuota pCuota)
         {
             try
             {
+                int result = await cuotaBL.CrearAsync(pCuota);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pCuota);
             }
         }
 
         // GET: CuotaController/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(Cuota pCuota)
         {
-            return View();
+            var cuota = await cuotaBL.ObtenerPorIdAsync(pCuota);
+            ViewBag.Error = "";
+            return View(cuota);
         }
 
         // POST: CuotaController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, Cuota pCuota)
         {
             try
             {
+                int result = await cuotaBL.ModificarAsync(pCuota);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pCuota);
             }
         }
 
         // GET: CuotaController/Delete/5
-        public ActionResult Delete(int id)
+        public async Task<IActionResult> Delete(Cuota pCuota)
         {
-            return View();
+            var cuota = await cuotaBL.ObtenerPorIdAsync(pCuota);
+            return View(cuota);
         }
 
         // POST: CuotaController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<IActionResult> Delete(int id, Cuota pCuota)
         {
             try
             {
+                int result = await cuotaBL.EliminarAsync(pCuota);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Error = ex.Message;
+                return View(pCuota);
             }
         }
     }
