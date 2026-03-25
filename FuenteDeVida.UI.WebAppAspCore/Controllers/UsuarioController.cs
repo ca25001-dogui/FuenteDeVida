@@ -79,5 +79,46 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
                 return View();
             }
         }
+        // GET: UsuarioController/Create
+        public ActionResult Correo()
+        {
+            return View();
+        }
+
+        // POST: UsuarioController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Correo(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        // GET: UsuarioController/Create
+        public ActionResult Clave()
+        {
+            return View();
+        }
+
+        // POST: UsuarioController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Clave(IFormCollection collection)
+        {
+            try
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
+        }
     }
 }
