@@ -13,6 +13,7 @@ namespace FuenteDeVida.EN
     {
         [Key]
         public int IdPago {  get; set; }
+        [Required(ErrorMessage = "El Monto es obligatorio")]
         public decimal MontoTotal { get; set; }
         public string Estado { get; set; }
 
@@ -21,6 +22,6 @@ namespace FuenteDeVida.EN
 
         //Llave foranea 
         public int IdFactura { get; set; }
-        public virtual Factura Factura { get; set; } = new Factura();
+       
     }
 }
