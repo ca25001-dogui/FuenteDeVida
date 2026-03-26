@@ -4,33 +4,35 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalles</h1>
 
 <div>
-    <h4>Rol</h4>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdRol)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdRol)
-        </dd>
+        </dd>*@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NombreRol)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.NombreRol)
         </dd>
-        <dt class = "col-sm-2">
+        @*<dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Top_Aux)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Top_Aux)
-        </dd>
+        </dd>*@
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+<div class="row">
+    <div class=" cold-md-12">
+        <div class="form-group">
+            @Html.ActionLink("Ir a Modificar", "Edit", new { id = Model.IdRol }, new { @class = "btn btn-info" })
+            <a asp-action="Index" class=" btn btn-dark">CANCELAR</a>
+        </div>
+    </div>
 </div>
