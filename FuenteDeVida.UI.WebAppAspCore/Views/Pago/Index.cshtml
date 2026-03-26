@@ -8,7 +8,7 @@
     int[] tops = { 10, 20, 50, 100, 500, 1000, 10000, -1 };
     int topActual = Convert.ToInt32(ViewBag.Top);
 }
-<h1>Buscar</h1>
+<h1>Buscar Pagos</h1>
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Index">
@@ -41,7 +41,7 @@
             </div>
             <div class="form-group">
                 <input type="submit" value="Buscar" class="btn btn-primary" />
-                <a asp-action="Create" class="btn btn-primary">Crear</a>
+                <a asp-action="Create" class="btn btn-primary">Crear Nuevo</a>
             </div>
         </form>
     </div>
@@ -50,32 +50,32 @@
 <table class="table table-responsive paginationjs">
     <thead>
         <tr>
-            @* <th>
+            <th>
                 @Html.DisplayNameFor(model => model.IdPago)
-            </th> *@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.MontoTotal)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Estado)
             </th>
-            <th colspan="3"> Acciones</th>
             @*  <th>
                 @Html.DisplayNameFor(model => model.Top_Aux)
             </th> *@
-            @*  <th>
+             <th>
                 @Html.DisplayNameFor(model => model.IdFactura)
             </th>
-            <th></th> *@
+            <th colspan="3"> Acciones</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
             <tr data-page="@numPage">
-                @* <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.IdPago)
-                </td> *@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.MontoTotal)
                 </td>
@@ -85,9 +85,9 @@
                 @* <td>
                     @Html.DisplayFor(modelItem => item.Top_Aux)
                 </td> *@
-                @* <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.IdFactura)
-                </td> *@
+                </td>
                 <td class="botonestabla">
                     @Html.ActionLink("Modificar", "Edit", new { id = item.IdPago }, new { @class = "btn-success" })
                 </td>

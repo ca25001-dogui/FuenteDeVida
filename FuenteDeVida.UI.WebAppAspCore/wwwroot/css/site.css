@@ -71,3 +71,31 @@ body {
     padding-left: 2px !important;
     padding-right: 2px !important;
 }
+
+/*Agregar diseño de imagen para la pagina inicial del sitio*/
+.hero {
+    background-image: url('/images/fuente.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+.hero-content {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 30px;
+    border-radius: 10px;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 1.2rem;
+}

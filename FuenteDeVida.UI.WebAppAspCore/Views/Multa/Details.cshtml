@@ -4,45 +4,47 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
-
+<h1>Ver Multa</h1>
+<hr />
 <div>
-    <h4>Multa</h4>
-    <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdMulta)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdMulta)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Monto)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Monto)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaVencimiento)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaVencimiento)
         </dd>
-        <dt class = "col-sm-2">
+        @* <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Top_Aux)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Top_Aux)
-        </dd>
-        <dt class = "col-sm-2">
+        </dd> *@
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdComunidad)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdComunidad)
         </dd>
     </dl>
 </div>
-<div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+<div class="row">
+    <div class=" cold-md-12">
+        <div class="form-group">
+            @Html.ActionLink("Ir a Modificar", "Edit", new { id = Model.IdMulta }, new { @class = "btn btn-info" })
+            <a asp-action="Index" class="btn btn-dark">CANCELAR</a>
+        </div>
+    </div>
 </div>
