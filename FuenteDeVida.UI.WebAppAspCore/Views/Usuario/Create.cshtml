@@ -2,21 +2,20 @@
 
 @{
     ViewData["Title"] = "Create";
+    List<FuenteDeVida.EN.Rol> roles = ViewBag.Roles as List<FuenteDeVida.EN.Rol>;
 }
 
-<h1>Create</h1>
-
-<h4>Usuario</h4>
+<h1>Crear Usuario</h1>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
+<form asp-action="Create">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="row">
+        <div class="col-md-4">
+            @* <div class="form-group">
                 <label asp-for="IdUsuario" class="control-label"></label>
                 <input asp-for="IdUsuario" class="form-control" />
                 <span asp-validation-for="IdUsuario" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
                 <input asp-for="Nombre" class="form-control" />
@@ -37,27 +36,48 @@
                 <input asp-for="Clave" class="form-control" />
                 <span asp-validation-for="Clave" class="text-danger"></span>
             </div>
-            <div class="form-group">
+         @*    <div class="form-group">
                 <label asp-for="Top_Aux" class="control-label"></label>
                 <input asp-for="Top_Aux" class="form-control" />
                 <span asp-validation-for="Top_Aux" class="text-danger"></span>
-            </div>
+            </div> *@
             <div class="form-group">
                 <label asp-for="IdRol" class="control-label"></label>
                 <input asp-for="IdRol" class="form-control" />
                 <span asp-validation-for="IdRol" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-        </form>
+
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label asp-for="IdRol" class="control-label"></label>
+                    <select asp-for="IdRol" class="form-control">
+                        <option selected value="">SELECCIONAR</option>
+                        @foreach (var item in roles)
+                        {
+                            <option value="@item.IdRol">@item.NombreRol</option>
+                        }
+                    </select>
+                    <span asp-validation-for="IdRol" class="text-danger"></span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+            <div class="form-group">
+                <input type="submit" value="GUARDAR" class="btn btn-primary" />
+                <a asp-action="Index" class=" btn btn-dark">CANCELAR</a>
+            </div>
+            <span class="text-danger">@ViewBag.Error</span>
+        </div>
+    </div>
 
+</form>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

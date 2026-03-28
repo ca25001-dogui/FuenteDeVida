@@ -17,6 +17,7 @@ namespace FuenteDeVida.EN
         public decimal Monto { get; set; }    
         public DateTime FechaVencimiento { get; set; }
 
+        //Auxiliar para busqueda
         [NotMapped]
         public int Top_Aux { get; set; }
 

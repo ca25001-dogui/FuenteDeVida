@@ -42,5 +42,18 @@ namespace FuenteDeVida.BL
         {
             return await UsuarioDAL.BuscarAsync(pUsuario);
         }
+        public async Task<Usuario> CorreoAsync(Usuario pUsuario)
+        {
+            return await UsuarioDAL.CorreoAsync(pUsuario);
+        }
+        public async Task<int> ClaveAsync(Usuario pUsuario, string pPasswordAnt)
+        {
+            return await UsuarioDAL.ClaveAsync(pUsuario, pPasswordAnt);
+        }
+        public async Task<List<Usuario>> BuscarIncluirRolesAsync(Usuario pUsuario)
+        {
+            return await UsuarioDAL.BuscarIncluirRolesAsync(pUsuario);
+        }
     }
 }
+    

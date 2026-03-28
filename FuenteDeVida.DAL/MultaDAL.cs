@@ -25,15 +25,25 @@ namespace FuenteDeVida.DAL
 
         public static async Task<int> ModificarAsync(Multa pMulta)
         {
-            int result = 0;
-            using (var bdContexto = new BDContexto())
             {
-                var multa = await bdContexto.Multa.FirstOrDefaultAsync(s => s.IdMulta == pMulta.IdMulta);
-                multa.Monto = pMulta.Monto;
-                bdContexto.Update(multa);
-                result = await bdContexto.SaveChangesAsync();
+                int result = 0;
+                using (var bdContexto = new BDContexto())
+                {
+                    var multa = await bdContexto.Multa
+                        .FirstOrDefaultAsync(s => s.IdMulta == pMulta.IdMulta);
+
+                    if (multa != null)
+                    {
+                        multa.Monto = pMulta.Monto;
+                        multa.FechaVencimiento = pMulta.FechaVencimiento;
+                        multa.IdComunidad = pMulta.IdComunidad;
+
+                        bdContexto.Update(multa);
+                        result = await bdContexto.SaveChangesAsync();
+                    }
+                }
+                return result;
             }
-            return result;
         }
         public static async Task<int> EliminarAsync(Multa pMulta)
         {
@@ -41,8 +51,15 @@ namespace FuenteDeVida.DAL
             using (var bdContexto = new BDContexto())
             {
                 var multa = await bdContexto.Multa.FirstOrDefaultAsync(s => s.IdMulta == pMulta.IdMulta);
-                bdContexto.Multa.Remove(multa);
-                result = await bdContexto.SaveChangesAsync();
+                if (multa != null)
+                {
+                    bdContexto.Multa.Remove(multa);
+                    result = await bdContexto.SaveChangesAsync();
+                }
+                else
+                {
+                    result = 0; // No encontró la multa
+                }
             }
             return result;
         }

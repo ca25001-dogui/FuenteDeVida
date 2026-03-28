@@ -4,11 +4,10 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<h1>Eliminar Usuario</h1>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>Esta seguro que quiere eliminar un usuario?</h3>
 <div>
-    <h4>Usuario</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -34,19 +33,19 @@
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Correo)
-        </dd>
+        @* </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Clave)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Clave)
-        </dd>
-        <dt class = "col-sm-2">
+        </dd> *@
+     @*    <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Top_Aux)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.Top_Aux)
-        </dd>
+        </dd> *@
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdRol)
         </dt>
@@ -56,7 +55,8 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="Eliminar" class="btn btn-danger" /> |
+        <a asp-action="Index" class=" btn btn-dark">CANCELAR</a>
     </form>
+    <span class="text-danger">@ViewBag.Error</span>
 </div>

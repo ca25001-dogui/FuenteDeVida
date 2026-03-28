@@ -131,34 +131,88 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
             }
         }
         // GET: UsuarioController/Create
-        public ActionResult Correo()
+        [AllowAnonymous]
+        public async Task<IActionResult> Correo(string ReturnUrl = null)
         {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            ViewBag.Url = ReturnUrl;
+            ViewBag.Error = "";
             return View();
         }
 
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
-
-        // GET: UsuarioController/Create
-        public ActionResult Clave()
-        {
-            return View();
-        }
-
-        // POST: UsuarioController/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Clave(IFormCollection collection)
+        [AllowAnonymous]
+        public async Task<IActionResult> Correo(Usuario pUsuario, string pReturnUrl = null)
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var usuario = await usuarioBL.CorreoAsync(pUsuario);
+                if (usuario != null && usuario.IdUsuario > 0 && pUsuario.Correo == usuario.Correo)
+                {
+                    usuario.Rol = await rolBL.ObtenerPorIdAsync(new Rol { IdRol = usuario.IdRol });
+                    var claims = new [] { new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Name, usuario.Correo), new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, usuario.Rol.NombreRol) };
+                    var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                }
+                else
+                    throw new Exception("Credenciales incorrectas");
+                if (!string.IsNullOrWhiteSpace(pReturnUrl))
+                    return Redirect(pReturnUrl);
+                else
+                    return RedirectToAction("Index", "Home");
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.Url = pReturnUrl;
+                ViewBag.Error = ex.Message;
+                return View(new Usuario { Correo = pUsuario.Correo });
+            }
+        }
+        [AllowAnonymous]
+        public async Task<IActionResult> CerrarSesion(string ReturnUrl = null)
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Correo", "Usuario");
+        }
+        // GET: UsuarioController/Create
+        public async Task<IActionResult> ClaveAsync()
+        {
+
+            var usuarios = await usuarioBL.BuscarAsync(new Usuario { Correo = User.Identity.Name, Top_Aux = 1 });
+            var usuarioActual = usuarios.FirstOrDefault();
+            ViewBag.Error = "";
+            return View(usuarioActual);
+        }
+
+
+        // GET: UsuarioController/Create
+        public async Task<IActionResult> Clave()
+        {
+
+            var usuarios = await usuarioBL.BuscarAsync(new Usuario { Correo = User.Identity.Name, Top_Aux = 1 });
+            var usuarioActual = usuarios.FirstOrDefault();
+            ViewBag.Error = "";
+            return View(usuarioActual);
+        }
+        // POST: UsuarioController/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Clave(Usuario pUsuario, string pPasswordAnt)
+        {
+            try
+            {
+                int result = await usuarioBL.ClaveAsync(pUsuario, pPasswordAnt);
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return RedirectToAction("Correo", "Usuario");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Error = ex.Message;
+                var usuarios = await usuarioBL.BuscarAsync(new Usuario { Correo = User.Identity.Name, Top_Aux = 1 });
+                var usuarioActual = usuarios.FirstOrDefault();
+                return View(usuarioActual);
             }
         }
     }
