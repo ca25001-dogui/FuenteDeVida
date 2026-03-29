@@ -52,9 +52,9 @@
 <table class="table table-responsive paginationjs">
     <thead>
         <tr>
-            @*<th>
+            <th>
                 @Html.DisplayNameFor(model => model.IdComunidad)
-            </th>*@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
@@ -75,9 +75,9 @@
 @foreach (var item in Model)
         {
             <tr data-page="@numPage">
-                @*<td>
+                <td>
                 @Html.DisplayFor(modelItem => item.IdComunidad)
-            </td>*@
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nombre)
             </td>
