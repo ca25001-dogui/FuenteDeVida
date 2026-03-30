@@ -9,10 +9,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 namespace FuenteDeVida.UI.WebAppAspCore.Controllers
 {
     //[Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
-
-
     public class FacturaController : Controller
-
     {
         FacturaBL facturaBL = new FacturaBL();
 

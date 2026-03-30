@@ -4,7 +4,7 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h1>Crear Cuota</h1>
 
 <h4>Cuota</h4>
 <hr />
@@ -43,21 +43,22 @@
                 <span asp-validation-for="FechaLimite" class="text-danger"></span>
             </div>
 
+            @* Opcional ocultar Top_Aux *@
+            @* 
             <div class="form-group">
                 <label asp-for="Top_Aux" class="control-label"></label>
                 <input asp-for="Top_Aux" class="form-control" />
                 <span asp-validation-for="Top_Aux" class="text-danger"></span>
             </div>
+            *@
 
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="GUARDAR" class="btn btn-primary" />
+                <a asp-action="Index" class="btn btn-dark">CANCELAR</a>
             </div>
+
         </form>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

@@ -4,51 +4,37 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Detalle Factura</h1>
 
 <div>
-    <h4>Factura</h4>
     <hr />
     <dl class="row">
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.IdFactura)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.IdFactura)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IdUsuario)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdUsuario)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.IdComunidad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.IdComunidad)
-        </dd>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.FechaEmision)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.FechaEmision)
         </dd>
+
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Total)
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Total)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Top_Aux)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Top_Aux)
-        </dd>
+
     </dl>
 </div>
+
 <div>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IdFactura }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Modificar", "Edit", new { id = Model.IdFactura }, new { @class = "btn btn-primary" })
+    <a asp-action="Index" class="btn btn-dark">CANCELAR</a>
 </div>
