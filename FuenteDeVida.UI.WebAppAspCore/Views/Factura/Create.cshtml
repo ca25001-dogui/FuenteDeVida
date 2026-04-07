@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "Create";
+
+    var usuarios = ViewBag.Usuarios as List<FuenteDeVida.EN.Usuario>;
+    var comunidades = ViewBag.Comunidades as List<FuenteDeVida.EN.Comunidad>;
 }
 
 <h1>Crear Factura</h1>
@@ -11,11 +14,11 @@
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <div class="form-group">
+            @*   <div class="form-group">
                 <label asp-for="IdFactura" class="control-label"></label>
                 <input asp-for="IdFactura" class="form-control" />
                 <span asp-validation-for="IdFactura" class="text-danger"></span>
-            </div>
+            </div> *@
 
             <div class="form-group">
                 <label asp-for="FechaEmision" class="control-label"></label>
@@ -28,6 +31,24 @@
                 <input asp-for="Total" class="form-control" />
                 <span asp-validation-for="Total" class="text-danger"></span>
             </div>
+
+            <label class="control-label">Usuario</label>
+            <select asp-for="IdUsuario" class="form-select">
+                <option value="">SELECCIONAR</option>
+                @foreach (var item in usuarios)
+                {
+                    <option value="@item.IdUsuario">@item.Nombre</option>
+                }
+            </select>
+
+            <label class="control-label">Comunidad</label>
+            <select asp-for="IdComunidad" class="form-select">
+                <option value="">SELECCIONAR</option>
+                @foreach (var item in comunidades)
+                {
+                    <option value="@item.IdComunidad">@item.Nombre</option>
+                }
+            </select>
 
             <div class="form-group">
                 <input type="submit" value="GUARDAR" class="btn btn-primary" />

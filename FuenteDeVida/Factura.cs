@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FuenteDeVida.EN;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 
 namespace FuenteDeVida.EN
 {
+
     public class Factura
     {
         [Key]
@@ -19,15 +21,18 @@ namespace FuenteDeVida.EN
         [NotMapped]
         public int Top_Aux { get; set; }
 
-        // Llave foránea Usuario
+        // Usuario 
         public int IdUsuario { get; set; }
-        public virtual Usuario Usuario { get; set; } = new Usuario();
 
-        // Llave foránea Comunidad
+        [ForeignKey("IdUsuario")]
+        public Usuario Usuario { get; set; }
+
+        // Comunidad 
         public int IdComunidad { get; set; }
-        public virtual Comunidad Comunidad { get; set; } = new Comunidad();
 
+        [ForeignKey("IdComunidad")]
+        public Comunidad Comunidad { get; set; }
     }
-
 }
+
 

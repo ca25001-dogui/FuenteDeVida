@@ -40,7 +40,7 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         // GET: UsuarioController/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var usuario = await usuarioBL.ObtenerPorIdAsync(new Usuario { IdRol = id });
+            var usuario = await usuarioBL.ObtenerPorIdAsync(new Usuario { IdUsuario = id });
             usuario.Rol = await rolBL.ObtenerPorIdAsync(new Rol { IdRol = usuario.IdRol });
             return View(usuario);
         }
@@ -94,7 +94,7 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = ex.Message;
+                ViewBag.Error = ex.ToString();
                 ViewBag.Roles = await rolBL.ObtenerTodosAsync();
                 return View(pUsuario);
             }
@@ -132,7 +132,7 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         }
         // GET: UsuarioController/Create
         [AllowAnonymous]
-        public async Task<IActionResult> Correo(string ReturnUrl = null)
+        public async Task<IActionResult> Login(string ReturnUrl = null)
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             ViewBag.Url = ReturnUrl;
@@ -144,20 +144,34 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [AllowAnonymous]
-        public async Task<IActionResult> Correo(Usuario pUsuario, string pReturnUrl = null)
+        public async Task<IActionResult> Login(Usuario pUsuario, string pReturnUrl = null)
         {
             try
             {
-                var usuario = await usuarioBL.CorreoAsync(pUsuario);
+                var usuario = await usuarioBL.LoginAsync(pUsuario);
+
                 if (usuario != null && usuario.IdUsuario > 0 && pUsuario.Correo == usuario.Correo)
                 {
                     usuario.Rol = await rolBL.ObtenerPorIdAsync(new Rol { IdRol = usuario.IdRol });
-                    var claims = new [] { new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Name, usuario.Correo), new System.Security.Claims.Claim(System.Security.Claims.ClaimTypes.Role, usuario.Rol.NombreRol) };
+
+                    var claims = new[]
+                    {
+                new Claim(ClaimTypes.Name, usuario.Correo),
+                new Claim(ClaimTypes.Role, usuario.Rol.NombreRol)
+            };
+
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
+                    await HttpContext.SignInAsync(
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        new ClaimsPrincipal(identity)
+                    );
                 }
                 else
+                {
                     throw new Exception("Credenciales incorrectas");
+                }
+
                 if (!string.IsNullOrWhiteSpace(pReturnUrl))
                     return Redirect(pReturnUrl);
                 else
@@ -174,7 +188,7 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         public async Task<IActionResult> CerrarSesion(string ReturnUrl = null)
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Correo", "Usuario");
+            return RedirectToAction("Login", "Usuario");
         }
         // GET: UsuarioController/Create
         public async Task<IActionResult> ClaveAsync()

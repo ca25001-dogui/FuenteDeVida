@@ -59,9 +59,9 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         }
 
         // GET: PagoController/Edit/5
-        public async Task<IActionResult> Edit(Pago pPago)
+        public async Task<IActionResult> Edit(int id)
         {
-            var pago = await pagoBL.ObtenerPorIdAsync(pPago);
+            var pago = await pagoBL.ObtenerPorIdAsync(new Pago {IdPago = id});
             ViewBag.Error = "";
             return View(pago);
         }

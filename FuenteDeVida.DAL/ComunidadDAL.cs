@@ -76,14 +76,18 @@ namespace FuenteDeVida.DAL
         }
         public static async Task<List<Comunidad>> BuscarAsync(Comunidad pComunidad)
         {
-            var comunidades = new List<Comunidad>();
-            using (var bdContexto = new BDContexto())
+            using (var db = new BDContexto())
             {
-                var select = bdContexto.Comunidad.AsQueryable();
-                select = QuerySelect(select, pComunidad);
-                comunidades = await select.ToListAsync();
+                var query = db.Comunidad.AsQueryable();
+
+                if (!string.IsNullOrEmpty(pComunidad.Nombre))
+                    query = query.Where(c => c.Nombre.Contains(pComunidad.Nombre));
+
+                if (pComunidad.Top_Aux > 0)
+                    query = query.Take(pComunidad.Top_Aux);
+
+                return await query.ToListAsync();
             }
-            return comunidades;
         }
     }
 }

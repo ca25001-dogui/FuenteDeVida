@@ -9,7 +9,7 @@
     int topActual = Convert.ToInt32(ViewBag.Top);
 }
 
-<h1>Buscar</h1>
+<h1>Buscar Comunidad</h1>
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Index">
@@ -93,13 +93,13 @@
 
 
             <td class="botonestabla">
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdComunidad }, new { @class = "btn-success" })
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdComunidad }, new { @class = "btn btn-success" })
                 </td>
                 <td class="botonestabla">
-                    @Html.ActionLink("Ver", "Details", new { id = item.IdComunidad }, new { @class = "btn-info" })
+                    @Html.ActionLink("Ver", "Details", new { id = item.IdComunidad }, new { @class = "btn btn-info" })
                 </td>
                 <td class="botonestabla">
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdComunidad }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Eliminar", "Delete", new { idComunidad = item.IdComunidad }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
             numRegistros++;

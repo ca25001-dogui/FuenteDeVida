@@ -28,11 +28,12 @@ namespace FuenteDeVida.DAL
         }
         private static async Task<bool> ExisteCorreo(Usuario pUsuario, BDContexto pDbContexto)
         {
-            bool result = false;
-            var LoginUsuarioExiste = await pDbContexto.Usuario.FirstOrDefaultAsync(s => s.Nombre == pUsuario.Nombre && s.IdUsuario != pUsuario.IdUsuario);
-            if (LoginUsuarioExiste != null && LoginUsuarioExiste.IdUsuario > 0 && LoginUsuarioExiste.Nombre == pUsuario.Nombre)
-                result = true;
-            return result;
+            var usuarioExiste = await pDbContexto.Usuario
+                .FirstOrDefaultAsync(s =>
+                    s.Correo == pUsuario.Correo &&
+                    s.IdUsuario != pUsuario.IdUsuario);
+
+            return usuarioExiste != null;
         }
 
 
@@ -70,12 +71,13 @@ namespace FuenteDeVida.DAL
                     usuario.Nombre = pUsuario.Nombre;
                     usuario.Apellido = pUsuario.Apellido;
                     usuario.Correo = pUsuario.Correo;
+                    EncriptarMD5(pUsuario);
                     usuario.Clave = pUsuario.Clave;
                     bdContexto.Update(usuario);
                     result = await bdContexto.SaveChangesAsync();
                 }
                 else
-                    throw new Exception("Login ya existe");
+                    throw new Exception("Correo ya existe");
             }
             return result;
         }
@@ -161,7 +163,7 @@ namespace FuenteDeVida.DAL
             }
             return usuarios;
         }
-        public static async Task<Usuario> CorreoAsync(Usuario pUsuario)
+        public static async Task<Usuario> LoginAsync(Usuario pUsuario)
         {
             var usuario = new Usuario();
             using (var bdContexto = new BDContexto())
