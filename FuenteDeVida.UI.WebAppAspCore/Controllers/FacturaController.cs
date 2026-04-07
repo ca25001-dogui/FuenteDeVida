@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using FuenteDeVida.BL;
+using FuenteDeVida.DAL;
 /***************************/
 using FuenteDeVida.EN;
-using FuenteDeVida.BL;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using SistemaContabilidad.BL;
 
 namespace FuenteDeVida.UI.WebAppAspCore.Controllers
 {
@@ -12,6 +14,8 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
     public class FacturaController : Controller
     {
         FacturaBL facturaBL = new FacturaBL();
+        UsuarioBL usuarioBL = new UsuarioBL();
+        ComunidadBL comunidadBL = new ComunidadBL();
 
         // GET: FacturaController
         public async Task<IActionResult> Index(Factura pFactura = null)
@@ -36,8 +40,11 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         }
 
         // GET: FacturaController/Create
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
+            ViewBag.Usuarios = await usuarioBL.ObtenerTodosAsync();
+            ViewBag.Comunidades = await comunidadBL.ObtenerTodosAsync();
+
             ViewBag.Error = "";
             return View();
         }
@@ -49,20 +56,33 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         {
             try
             {
+                // 🔥 Validación básica
+                if (pFactura.IdUsuario == 0 || pFactura.IdComunidad == 0)
+                    throw new Exception("Debe seleccionar Usuario y Comunidad");
+
+                // 🔥 Fecha automática (por si no la mandan)
+                if (pFactura.FechaEmision == DateTime.MinValue)
+                    pFactura.FechaEmision = DateTime.Now;
+
                 int result = await facturaBL.CrearAsync(pFactura);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
-                ViewBag.Error = ex.Message;
+                ViewBag.Error = ex.ToString();
+
+                // 🔥 MUY IMPORTANTE: volver a llenar combos
+                ViewBag.Usuarios = await usuarioBL.ObtenerTodosAsync();
+                ViewBag.Comunidades = await comunidadBL.ObtenerTodosAsync();
+
                 return View(pFactura);
             }
         }
 
         // GET: FacturaController/Edit/5
-        public async Task<IActionResult> Edit(Factura pFactura)
+        public async Task<IActionResult> Edit(int id)
         {
-            var factura = await facturaBL.ObtenerPorIdAsync(pFactura);
+            var factura = await facturaBL.ObtenerPorIdAsync(new Factura { IdFactura = id });
             ViewBag.Error = "";
             return View(factura);
         }

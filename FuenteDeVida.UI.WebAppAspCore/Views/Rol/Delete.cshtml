@@ -6,7 +6,7 @@
 
 <h1>Delete</h1>
 
-<h3>Estas seguro de borrarlo?</h3>
+<h3>¿Esta seguro de eliminar un Rol?</h3>
 <div>
     <h4>Rol</h4>
     <hr />
@@ -31,8 +31,9 @@
         </dd>*@
     </dl>
     
-    <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <form asp-action="Delete" asp-route-id="@Model.IdRol">
+        <input type="hidden" asp-for="IdRol" />
+        <button type="submit" class="btn btn-danger">ELIMINAR</button>
+        <a asp-action="Index" class=" btn btn-dark">CANCELAR</a>
     </form>
 </div>

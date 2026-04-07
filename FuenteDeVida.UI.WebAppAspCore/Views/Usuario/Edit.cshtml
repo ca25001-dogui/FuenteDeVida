@@ -7,66 +7,78 @@
 
 <h1>Modificar Usuario</h1>
 <hr />
+
 <form asp-action="Edit">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="IdUsuario" class="form-control" />
+
+    <input type="hidden" asp-for="IdUsuario" />
+
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
+                <label asp-for="Nombre"></label>
                 <input asp-for="Nombre" class="form-control" />
                 <span asp-validation-for="Nombre" class="text-danger"></span>
             </div>
         </div>
+
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="Apellido" class="control-label"></label>
+                <label asp-for="Apellido"></label>
                 <input asp-for="Apellido" class="form-control" />
                 <span asp-validation-for="Apellido" class="text-danger"></span>
             </div>
         </div>
-    </div>
-    <div class="row">
+
         <div class="col-md-4">
             <div class="form-group">
-                <label asp-for="IdRol" class="control-label"></label>
-                <select asp-for="IdRol" class="form-control">
-                    <option selected value="">SELECCIONAR</option>
-                    @foreach (var item in roles)
-                    {
-                        if (Model.IdRol == item.IdRol)
-                        {
-                            <option selected value="@item.IdRol">@item.NombreRol</option>
-                        }
-                        else
-                        {
-                            <option value="@item.IdRol">@item.NombreRol</option>
-                        }
-                    }
-                </select>
-                <span asp-validation-for="IdRol" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Correo" class="control-label"></label>
+                <label asp-for="Correo"></label>
                 <input asp-for="Correo" class="form-control" />
                 <span asp-validation-for="Correo" class="text-danger"></span>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12">
+
+    <div class="row mt-3">
+        <div class="col-md-4">
             <div class="form-group">
-                <input type="submit" value="GUARDAR" class="btn btn-primary" />
-                <a asp-action="Index" class="btn btn-dark">CANCELAR</a>
+                <label asp-for="Clave"></label>
+                <input asp-for="Clave" type="password" class="form-control" />
+                <span asp-validation-for="Clave" class="text-danger"></span>
             </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="form-group">
+                <label asp-for="IdRol"></label>
+                <select asp-for="IdRol" class="form-select">
+                    <option value="">SELECCIONAR</option>
+                    @foreach (var item in roles)
+                    {
+                        <option value="@item.IdRol" selected="@(Model != null && Model.IdRol == item.IdRol)">
+                            @item.NombreRol
+                        </option>
+                    }
+                </select>
+                <span asp-validation-for="IdRol" class="text-danger"></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <input type="submit" value="GUARDAR" class="btn btn-primary" />
+            <a asp-action="Index" class="btn btn-dark">CANCELAR</a>
+            <br />
             <span class="text-danger">@ViewBag.Error</span>
         </div>
     </div>
 </form>
+
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     <script>
         $(function () {
             $("form input[name],form select[name]").trigger("blur");

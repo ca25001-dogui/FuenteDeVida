@@ -59,9 +59,10 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         }
 
         // GET: MultaController/Edit/5
-        public async Task<IActionResult> Edit(Multa pMulta)
+        public async Task<IActionResult> Edit(int id)
         {
-            var multa = await multaBL.ObtenerPorIdAsync(pMulta);
+            var multa = await multaBL.ObtenerPorIdAsync(new Multa { IdMulta = id });
+
             ViewBag.Error = "";
             return View(multa);
         }
@@ -78,7 +79,7 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = ex.Message;
+                ViewBag.Error = ex.ToString();
                 return View(pMulta);
             }
         }

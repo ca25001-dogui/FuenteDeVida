@@ -89,13 +89,13 @@
                     @Html.DisplayFor(modelItem => item.IdFactura)
                 </td>
                 <td class="botonestabla">
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdPago }, new { @class = "btn-success" })
+                    @Html.ActionLink("Modificar", "Edit", new { idPago = item.IdPago }, new { @class = "btn-success" })
                 </td>
                 <td class="botonestabla">
                     @Html.ActionLink("Ver", "Details", new { id = item.IdPago }, new { @class = "btn-info" })
                 </td>
                 <td class="botonestabla">
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdPago }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Eliminar", "Delete", new { idPago = item.IdPago }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
             numRegistros++;

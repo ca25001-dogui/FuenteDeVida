@@ -6,7 +6,7 @@
 
 <h1>Eliminar Multa</h1>
 
-<h3>Esta seguro de eliminar una multa?</h3>
+<h3>¿Esta seguro de eliminar una multa?</h3>
 <div>
     <hr />
     <dl class="row">
@@ -43,7 +43,7 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="ELIMINAR" class="btn btn-danger" /> |
+        <button type="submit" class="btn btn-danger">ELIMINAR</button>
         <a asp-action="Index" class=" btn-dark">CANCELAR</a>
     </form>
     <span class=" text-danger">@ViewBag.Error</span>

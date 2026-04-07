@@ -76,6 +76,16 @@
                 @Html.DisplayNameFor(model => model.Total)
             </th>
 
+            <th>
+                @Html.DisplayNameFor(model => model.IdUsuario)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.IdComunidad)
+            </th>
+
+            
+
             <th colspan="3">Acciones</th>
         </tr>
     </thead>
@@ -97,16 +107,24 @@
                     @Html.DisplayFor(modelItem => item.Total)
                 </td>
 
-                <td class="botonestabla">
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdFactura }, new { @class = "btn-success" })
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdUsuario)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdComunidad)
                 </td>
 
                 <td class="botonestabla">
-                    @Html.ActionLink("Ver", "Details", new { id = item.IdFactura }, new { @class = "btn-info" })
+                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdFactura }, new { @class = "btn btn-success" })
                 </td>
 
                 <td class="botonestabla">
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdFactura }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Ver", "Details", new { id = item.IdFactura }, new { @class = "btn btn-info" })
+                </td>
+
+                <td class="botonestabla">
+                    @Html.ActionLink("Eliminar", "Delete", new { idFactura = item.IdFactura }, new { @class = "btn btn-danger" })
                 </td>
 
             </tr>

@@ -11,20 +11,22 @@ namespace FuenteDeVida.EN
     public class Cuota
     {
         [Key]
-            public int IdCuota { get; set; }
+        public int IdCuota { get; set; }
 
-            public decimal Monto { get; set; }
-            public string TipoServicio { get; set; } = string.Empty;
-            public DateTime FechaLimite { get; set; }
+        public decimal Monto { get; set; }
+        public string TipoServicio { get; set; } = string.Empty;
+        public DateTime FechaLimite { get; set; }
 
-            [NotMapped]
-            public int Top_Aux { get; set; }
+        [NotMapped]
+        public int Top_Aux { get; set; }
 
-            // Llave foránea
-            public int IdComunidad { get; set; }
-            public virtual Comunidad Comunidad { get; set; } = new Comunidad();
-        
+        // Llave foránea
+        public int IdComunidad { get; set; }
+
+        [ForeignKey("IdComunidad")]
+        public Comunidad Comunidad { get; set; }
+
     }
 }
 
- 
+

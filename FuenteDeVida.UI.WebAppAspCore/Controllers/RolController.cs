@@ -94,17 +94,17 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         // POST: RolController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id, Rol pRol)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                int result = await rolBL.EliminarAsync(pRol);
+                int result = await rolBL.EliminarAsync(new Rol { IdRol = id });
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View(pRol);
+                return View();
             }
         }
     }

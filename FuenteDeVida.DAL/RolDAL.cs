@@ -43,8 +43,11 @@ namespace FuenteDeVida.DAL
             using (var bdContexto = new BDContexto())
             {
                 var rol = await bdContexto.Rol.FirstOrDefaultAsync(s => s.IdRol == pRol.IdRol);
-                bdContexto.Rol.Remove(rol);
-                result = await bdContexto.SaveChangesAsync();
+                if (rol != null)
+                {
+                    bdContexto.Rol.Remove(rol);
+                    result = await bdContexto.SaveChangesAsync();
+                }
             }
             return result;
         }
@@ -71,8 +74,8 @@ namespace FuenteDeVida.DAL
         {
             if (pRol.IdRol > 0)
                 pQuery = pQuery.Where(s => s.IdRol == pRol.IdRol);
-            
-                pQuery = pQuery.Where(s => s.NombreRol == pRol.NombreRol);
+
+            pQuery = pQuery.Where(s => s.NombreRol == pRol.NombreRol);
             pQuery = pQuery.OrderByDescending(s => s.IdRol).AsQueryable();
             if (pRol.Top_Aux > 0)
                 pQuery = pQuery.Take(pRol.Top_Aux).AsQueryable();
@@ -80,14 +83,19 @@ namespace FuenteDeVida.DAL
         }
         public static async Task<List<Rol>> BuscarAsync(Rol pRol)
         {
-            var roles = new List<Rol>();
-            using (var bdContexto = new BDContexto())
+            using (var db = new BDContexto())
             {
-                var select = bdContexto.Rol.AsQueryable();
-                select = QuerySelect(select, pRol);
-                roles = await select.ToListAsync();
+                var query = db.Rol.AsQueryable();
+
+                //Solo filtra si tiene un valor
+                if (!string.IsNullOrEmpty(pRol.NombreRol))
+                    query = query.Where(r => r.NombreRol.Contains(pRol.NombreRol));
+
+                if (pRol.Top_Aux > 0)
+                    query = query.Take(pRol.Top_Aux);
+
+                return await query.ToListAsync();
             }
-            return roles;
         }
     }
 }

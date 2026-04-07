@@ -8,12 +8,12 @@
 
 <div>
     <dl class="row">
-        @*<dt class = "col-sm-2">
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.IdRol)
         </dt>
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdRol)
-        </dd>*@
+        </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.NombreRol)
         </dt>
@@ -31,8 +31,8 @@
 <div class="row">
     <div class=" cold-md-12">
         <div class="form-group">
-            @Html.ActionLink("Ir a Modificar", "Edit", new { id = Model.IdRol }, new { @class = "btn btn-info" })
-            <a asp-action="Index" class=" btn btn-dark">CANCELAR</a>
+            @Html.ActionLink("Ir a Modificar", "Edit", new { idRol = Model.IdRol }, new { @class = "btn btn-info" })
+            <a asp-action="Index" class=" btn btn-dark">Cancelar</a>
         </div>
     </div>
 </div>

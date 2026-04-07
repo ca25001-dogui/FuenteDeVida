@@ -9,7 +9,7 @@
     int topActual = Convert.ToInt32(ViewBag.Top);
 }
 
-<h1>Buscar</h1>
+<h1>Buscar Rol</h1>
 <div class="row">
     <div class="col-md-12">
         <form asp-action="Index">
@@ -23,7 +23,7 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <label class="control-label">Top</label>
-                        <select name="top_aux" class="form-control">
+                        <select name="Top_aux" class="form-control">
                             @foreach (var item in tops)
                             {
                                 string strItem = item != -1 ? item.ToString() : "Todos";
@@ -77,13 +77,13 @@
                     @Html.DisplayFor(modelItem => item.Top_Aux)
                 </td> *@
                 <td class="botonestabla">
-                    @Html.ActionLink("Modificar", "Edit", new { id = item.IdRol }, new { @class = "btn-success" })
+                    @Html.ActionLink("Modificar", "Edit", new { idRol = item.IdRol }, new { @class = "btn btn-success" })
                 </td>
                 <td class="botonestabla">
-                    @Html.ActionLink("Ver", "Details", new { id = item.IdRol }, new { @class = "btn-info" })
+                    @Html.ActionLink("Ver", "Details", new { id = item.IdRol }, new { @class = "btn btn-info" })
                 </td>
                 <td class="botonestabla">
-                    @Html.ActionLink("Eliminar", "Delete", new { id = item.IdRol }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Eliminar", "Delete", new { idRol = item.IdRol }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
             numRegistros++;
