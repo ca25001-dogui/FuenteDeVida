@@ -32,7 +32,8 @@
     </dl>
     
     <form asp-action="Delete">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
+        <input type="submit" value="ELIMINAR" class="btn btn-danger" /> |
+        <a asp-action="Index" class=" btn-primary btn-dark">CANCELAR</a>
     </form>
+    <span class=" text-danger">@ViewBag.Error</span>
 </div>
