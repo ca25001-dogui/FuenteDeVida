@@ -43,8 +43,9 @@
     </dl>
     
     <form asp-action="Delete">
+        <input type="hidden" asp-for="IdMulta" />
         <button type="submit" class="btn btn-danger">ELIMINAR</button>
-        <a asp-action="Index" class=" btn-dark">CANCELAR</a>
+        <a asp-action="Index" class=" btn btn-dark">CANCELAR</a>
     </form>
     <span class=" text-danger">@ViewBag.Error</span>
 </div>

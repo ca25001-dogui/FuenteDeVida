@@ -42,9 +42,12 @@ namespace FuenteDeVida.DAL
             int result = 0;
             using (var bdContexto = new BDContexto())
             {
-                var pago = await bdContexto.Pago.FirstOrDefaultAsync(s => s.IdPago == pPago.IdPago);
-                bdContexto.Pago.Remove(pago);
-                result = await bdContexto.SaveChangesAsync();
+                var pago = await bdContexto.Pago.FirstOrDefaultAsync(p => p.IdPago == pPago.IdPago);
+                if (pago != null)
+                {
+                    bdContexto.Pago.Remove(pago);
+                    result = await bdContexto.SaveChangesAsync();
+                }
             }
             return result;
         }
