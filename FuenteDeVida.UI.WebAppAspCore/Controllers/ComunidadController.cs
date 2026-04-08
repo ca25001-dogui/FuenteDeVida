@@ -63,10 +63,9 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         // GET: ComunidadController/Edit/5
         public async Task<IActionResult> Edit(int id)
         {
-            var multa = await comunidadBL.ObtenerPorIdAsync(new Comunidad { IdComunidad = id });
-
+            var comunidad = await comunidadBL.ObtenerPorIdAsync(new Comunidad { IdComunidad = id });
             ViewBag.Error = "";
-            return View(multa);
+            return View(comunidad);
         }
 
         // POST: ComunidadController/Edit/5
@@ -81,7 +80,7 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Error = ex.ToString();
+                ViewBag.Error = ex.Message;
                 return View(pComunidad);
             }
         }

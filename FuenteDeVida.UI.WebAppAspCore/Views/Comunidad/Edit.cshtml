@@ -6,15 +6,16 @@
 
 <h1>Edit</h1>
 
-<h4>Comunidad</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdComunidad" class="form-control" />
             <div class="form-group">
                 <label asp-for="IdComunidad" class="control-label"></label>
-                <input asp-for="IdComunidad" class="form-control" readonly />
+                <input asp-for="IdComunidad" class="form-control" />
+                <span asp-validation-for="IdComunidad" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Nombre" class="control-label"></label>
@@ -48,4 +49,9 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        $(function () {
+            $("form input[name],form select[name]").trigger("blur");
+        });
+    </script>
 }

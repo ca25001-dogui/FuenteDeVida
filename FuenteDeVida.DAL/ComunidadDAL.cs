@@ -28,6 +28,8 @@ namespace FuenteDeVida.DAL
             {
                 var comunidad = await bdContexto.Comunidad.FirstOrDefaultAsync(s => s.IdComunidad == pComunidad.IdComunidad);
                 comunidad.CantidadUsuario = pComunidad.CantidadUsuario;
+                comunidad.Nombre = pComunidad.Nombre;
+                comunidad.Direccion = pComunidad.Direccion;
                 bdContexto.Update(comunidad);
                 result = await bdContexto.SaveChangesAsync();
             }
