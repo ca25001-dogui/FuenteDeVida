@@ -24,7 +24,7 @@
                             <label class="control-label">Apellido</label>
                             <input type="text" class="form-control" name="apellido" />
                         </div>
-                       @*  <div class="col-md-3">
+                        @*  <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Correo</label>
                                 <input type="text" class="form-control" name="correo" />
@@ -34,45 +34,45 @@
                                 <input type="text" class="form-control" name="clave" />
                             </div> *@
                     </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Rol</label>
+                        <select name="idRol" class="form-control">
+                            <option selected value="0">SELECCIONAR</option>
+                            @foreach (var item in roles)
+                            {
+                                <option value="@item.IdRol">@item.NombreRol</option>
+                            }
+                        </select>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">Rol</label>
-                            <select name="idRol" class="form-control">
-                                <option selected value="0">SELECCIONAR</option>
-                                @foreach (var item in roles)
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Top</label>
+                        <select name="top_aux" class="form-control">
+                            @foreach (var item in tops)
+                            {
+                                string strItem = item != -1 ? item.ToString() : "Todos";
+                                if (item != topActual)
                                 {
-                                    <option value="@item.IdRol">@item.NombreRol</option>
+                                    <option value="@item">@strItem</option>
                                 }
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <label class="control-label">Top</label>
-                            <select name="top_aux" class="form-control">
-                                @foreach (var item in tops)
+                                else
                                 {
-                                    string strItem = item != -1 ? item.ToString() : "Todos";
-                                    if (item != topActual)
-                                    {
-                                        <option value="@item">@strItem</option>
-                                    }
-                                    else
-                                    {
-                                        <option selected value="@item">@strItem</option>
-                                    }
+                                    <option selected value="@item">@strItem</option>
                                 }
-                            </select>
-                        </div>
+                            }
+                        </select>
                     </div>
                 </div>
-                <div class="form-group">
-                    <input type="submit" value="Buscar" class="btn btn-primary" />
-                    <a asp-action="Create" class="btn btn-primary">Crear</a>
-                </div>
+            </div>
+            <div class="form-group mt-2">
+                <input type="submit" value="Buscar" class="btn btn-primary" />
+                <a asp-action="Create" class="btn btn-primary">Crear</a>
+            </div>
         </form>
     </div>
 </div>
@@ -86,7 +86,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
-           @*  <th>
+            @*  <th>
                 @Html.DisplayNameFor(model => model.Apellido)
             </th>
             <th>
@@ -105,7 +105,7 @@
         @foreach (var item in Model)
         {
             <tr data-page="@numPage">
-              @*   <td>
+                @*   <td>
                     @Html.DisplayFor(modelItem => item.IdUsuario)
                 </td> *@
                 <td>
@@ -114,10 +114,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Apellido)
                 </td>
-               @*  <td>
+                @*  <td>
                     @Html.DisplayFor(modelItem => item.Correo)
                 </td> *@
-               @*  <td>
+                @*  <td>
                     @Html.DisplayFor(modelItem => item.Clave)
                 </td> *@
                 
@@ -125,45 +125,45 @@
                     @Html.DisplayFor(modelItem => item.IdRol)
                 </td> *@
                 <td>
-                <td class="botonestabla">
-                    @Html.ActionLink("Modificar", "Edit", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-success" })
-                </td>
-                <td class="botonestabla">
-                    @Html.ActionLink("Ver", "Details", new { Id = item.IdUsuario }, new { @class = "btn btn-info" }) 
-                </td>
-                <td class="botonestabla">
-                    @Html.ActionLink("Eliminar", "Delete", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-danger" })
-                </td>
-            </tr>
-            numRegistros++;
-            if (numRegistros == numRegistrosPorPage)
-            {
-                numPage++;
-                numRegistros = 0;
-            }
-        }
-        @{
-            if (numRegistros == 0)
-            {
-                numPage--;
-            }
-        }
-        
-    </tbody>
-</table>
-@if (numPage > 1)
-{
-    <div class="row" style="overflow:auto">
-        <div class="col-md-12">
-            <ul class="pagination paginationjs" data-numpage="@numPage" data-pageactive="1">
-                <li class="page-item" data-typepage="Previous"><a class="page-link" href="#">Previous</a></li>
-                @for (var i = 1; i <= numPage; i++)
+                    <td class="botonestabla">
+                        @Html.ActionLink("Modificar", "Edit", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-success" })
+                    </td>
+                    <td class="botonestabla">
+                        @Html.ActionLink("Ver", "Details", new { Id = item.IdUsuario }, new { @class = "btn btn-info" })
+                    </td>
+                    <td class="botonestabla">
+                        @Html.ActionLink("Eliminar", "Delete", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-danger" })
+                    </td>
+                </tr>
+                numRegistros++;
+                if (numRegistros == numRegistrosPorPage)
                 {
-                    <li class="page-item" data-page="@i" data-typepage="Item"><a class="page-link" href="#">@i</a></li>
+                    numPage++;
+                    numRegistros = 0;
                 }
-                <li class="page-item" data-typepage="Next"><a class="page-link" href="#">Next</a></li>
-            </ul>
+            }
+            @{
+                if (numRegistros == 0)
+                {
+                    numPage--;
+                }
+            }
+        
+        </tbody>
+    </table>
+    @if (numPage > 1)
+    {
+        <div class="row" style="overflow:auto">
+            <div class="col-md-12">
+                <ul class="pagination paginationjs" data-numpage="@numPage" data-pageactive="1">
+                    <li class="page-item" data-typepage="Previous"><a class="page-link" href="#">Previous</a></li>
+                    @for (var i = 1; i <= numPage; i++)
+                    {
+                        <li class="page-item" data-page="@i" data-typepage="Item"><a class="page-link" href="#">@i</a></li>
+                    }
+                    <li class="page-item" data-typepage="Next"><a class="page-link" href="#">Next</a></li>
+                </ul>
+            </div>
         </div>
-    </div>
-}
+    }
 

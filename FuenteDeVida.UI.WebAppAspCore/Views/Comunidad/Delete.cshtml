@@ -45,7 +45,7 @@
     
         <form asp-action="Delete" asp-route-id="@Model.IdComunidad">
             <input type="hidden" asp-for="IdComunidad" />
-        <input type="submit" value="ELIMINAR" class="btn btn-danger" /> |
+        <input type="submit" value="ELIMINAR" class="btn btn-danger" /> 
         <a asp-action="Index" class=" btn btn-dark">CANCELAR</a>
     </form>
     <span class=" text-danger">@ViewBag.Error</span>
