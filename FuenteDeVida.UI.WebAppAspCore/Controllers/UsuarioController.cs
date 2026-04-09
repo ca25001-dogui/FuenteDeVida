@@ -32,6 +32,10 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
             var taskBuscar = usuarioBL.BuscarAsync(pUsuario);
             var taskObtenerTodosRoles = rolBL.ObtenerTodosAsync();
             var usuarios = await taskBuscar;
+            foreach (var item in usuarios)
+            {
+                item.Rol = await rolBL.ObtenerPorIdAsync(new Rol { IdRol = item.IdRol });
+            }
             ViewBag.Top = pUsuario.Top_Aux;
             ViewBag.Roles = await taskObtenerTodosRoles;
             return View(usuarios);

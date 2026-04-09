@@ -86,7 +86,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Nombre)
             </th>
-           @*  <th>
+            <th>
                 @Html.DisplayNameFor(model => model.Apellido)
             </th>
             <th>
@@ -94,7 +94,7 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Clave)
-            </th> *@
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdRol)
             </th>
@@ -105,26 +105,25 @@
         @foreach (var item in Model)
         {
             <tr data-page="@numPage">
-              @*   <td>
+                <td>
                     @Html.DisplayFor(modelItem => item.IdUsuario)
-                </td> *@
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nombre)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Apellido)
                 </td>
-               @*  <td>
-                    @Html.DisplayFor(modelItem => item.Correo)
-                </td> *@
-               @*  <td>
-                    @Html.DisplayFor(modelItem => item.Clave)
-                </td> *@
-                
-                @* <td>
-                    @Html.DisplayFor(modelItem => item.IdRol)
-                </td> *@
                 <td>
+                    @Html.DisplayFor(modelItem => item.Correo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Clave)
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdRol)
+                </td>
                 <td class="botonestabla">
                     @Html.ActionLink("Modificar", "Edit", new { IdUsuario = item.IdUsuario }, new { @class = "btn btn-success" })
                 </td>
