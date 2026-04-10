@@ -88,6 +88,10 @@ namespace FuenteDeVida.DAL
             if (!string.IsNullOrWhiteSpace(pCuota.TipoServicio))
                 pQuery = pQuery.Where(s => s.TipoServicio.Contains(pCuota.TipoServicio));
 
+            if (pCuota.Monto > 0)
+                pQuery = pQuery.Where(s => s.Monto == pCuota.Monto);
+
+
             pQuery = pQuery.OrderByDescending(s => s.IdCuota).AsQueryable();
 
             if (pCuota.Top_Aux > 0)
