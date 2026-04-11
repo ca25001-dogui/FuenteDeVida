@@ -4,11 +4,12 @@
     ViewData["Title"] = "Clave";
 }
 
-<h1>Modificar Usuario</h1>
+<h1>Cambiar Clave</h1>
 <hr />
-<form asp-action="CambiarPassword">
+<form asp-action="Clave" method="post">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="IdUsuario" class="form-control" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" name="id" value="@Model.IdUsuario" />
     <div class="row">
         <div class="col-md-4">
             <div class="form-group">
@@ -19,36 +20,34 @@
         </div>
         <div class="col-md-4">
             <div class="form-group">
-                <label class="control-label">Clave actual</label>
-                <input type="Clave" name="pPasswordAnt" class="form-control" required />
+                <label>Clave actual</label>
+                <input type="password" name="claveActual" class="form-control" required />
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="form-group">
-                <label class="control-label">Nueva Clave</label>
-                <input asp-for="Clave" class="form-control" />
-                <span asp-validation-for="Clave" class="text-danger"></span>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Nueva clave</label>
+                    <input type="password" name="nuevaClave" class="form-control" required />
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>Confirmar clave</label>
+                    <input type="password" name="confirmarclave" class="form-control" required />
+                </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="form-group">
-                <label asp-for="Clave" class="control-label"></label>
-                <input asp-for="Clave" class="form-control" />
-                <span asp-validation-for="Clave" class="text-danger"></span>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group mt-2">
+                    <input type="submit" value="Cambiar Clave" class="btn btn-primary" />
+                    <a asp-action="Login" class="btn btn-dark">Cancelar</a>
+                </div>
+                <span class="text-danger">@ViewBag.Error</span>
             </div>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group mt-2">
-                <input type="submit" value="Cambiar Clave" class="btn btn-primary" />
-                <a asp-action="Login" class="btn btn-dark">Cancelar</a>
-            </div>
-            <span class="text-danger">@ViewBag.Error</span>
-        </div>
-    </div>
 </form>
 @section Scripts {
     @{

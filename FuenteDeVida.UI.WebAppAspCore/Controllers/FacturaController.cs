@@ -56,11 +56,11 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         {
             try
             {
-                // 🔥 Validación básica
+             
                 if (pFactura.IdUsuario == 0 || pFactura.IdComunidad == 0)
                     throw new Exception("Debe seleccionar Usuario y Comunidad");
 
-                // 🔥 Fecha automática (por si no la mandan)
+               
                 if (pFactura.FechaEmision == DateTime.MinValue)
                     pFactura.FechaEmision = DateTime.Now;
 
@@ -71,7 +71,7 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
             {
                 ViewBag.Error = ex.ToString();
 
-                // 🔥 MUY IMPORTANTE: volver a llenar combos
+              
                 ViewBag.Usuarios = await usuarioBL.ObtenerTodosAsync();
                 ViewBag.Comunidades = await comunidadBL.ObtenerTodosAsync();
 

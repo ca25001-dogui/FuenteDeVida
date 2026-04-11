@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
+using System.Security.Cryptography;
 
 namespace FuenteDeVida.UI.WebAppAspCore.Controllers
 {
@@ -194,10 +195,11 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Usuario");
         }
-     
+
 
 
         // GET: UsuarioController/Create
+        [HttpGet]
         public async Task<IActionResult> Clave()
         {
 
@@ -209,20 +211,36 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Clave(Usuario pUsuario, string pPasswordAnt)
+        public async Task<IActionResult> Clave(int id, string claveActual, string nuevaClave)
         {
             try
             {
-                int result = await usuarioBL.ClaveAsync(pUsuario, pPasswordAnt);
-                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                return RedirectToAction("Correo", "Usuario");
+                if (string.IsNullOrWhiteSpace(claveActual))
+                {
+                    ViewBag.Error = "Debe ingresar la clave actual";
+                    return View(new Usuario { IdUsuario = id });
+                }
+
+                if (string.IsNullOrWhiteSpace(nuevaClave))
+                {
+                    ViewBag.Error = "Debe ingresar la nueva clave";
+                    return View(new Usuario { IdUsuario = id });
+                }
+
+                var usuario = new Usuario
+                {
+                    IdUsuario = id,
+                    Clave = nuevaClave
+                };
+
+                await usuarioBL.ClaveAsync(usuario, claveActual);
+
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                var usuarios = await usuarioBL.BuscarAsync(new Usuario { Correo = User.Identity.Name, Top_Aux = 1 });
-                var usuarioActual = usuarios.FirstOrDefault();
-                return View(usuarioActual);
+                return View(new Usuario { IdUsuario = id });
             }
         }
     }
