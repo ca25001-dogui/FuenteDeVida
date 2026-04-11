@@ -194,15 +194,7 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Login", "Usuario");
         }
-        // GET: UsuarioController/Create
-        public async Task<IActionResult> ClaveAsync()
-        {
-
-            var usuarios = await usuarioBL.BuscarAsync(new Usuario { Correo = User.Identity.Name, Top_Aux = 1 });
-            var usuarioActual = usuarios.FirstOrDefault();
-            ViewBag.Error = "";
-            return View(usuarioActual);
-        }
+     
 
 
         // GET: UsuarioController/Create

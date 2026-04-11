@@ -13,11 +13,11 @@
 
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-            <input type="hidden" asp-for="IdCuota" />
+            <input type="hidden" asp-for="IdCuota" class="form-control" />
 
             <div class="form-group">
                 <label asp-for="IdCuota" class="control-label"></label>
-                <input asp-for="IdCuota" class="form-control" readonly />
+                <input asp-for="IdCuota" class="form-control"  />
                 <span asp-validation-for="IdCuota" class="text-danger"></span>
             </div>
 
