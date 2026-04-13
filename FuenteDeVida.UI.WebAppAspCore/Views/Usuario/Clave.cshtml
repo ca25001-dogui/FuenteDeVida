@@ -34,7 +34,9 @@
             <div class="col-md-4">
                 <div class="form-group">
                     <label>Confirmar clave</label>
-                    <input type="password" name="confirmarclave" class="form-control" required />
+                    <input type="password" name="confirmarClave" class="form-control" required />
+
+                    <span class="text-danger">@ViewBag.ErrorConfirmar</span>
                 </div>
             </div>
         </div>
@@ -44,8 +46,9 @@
                 <div class="form-group mt-2">
                     <input type="submit" value="Cambiar Clave" class="btn btn-primary" />
                     <a asp-action="Login" class="btn btn-dark">Cancelar</a>
+                    <br />
+                    <span class="text-danger">@ViewBag.Error</span>
                 </div>
-                <span class="text-danger">@ViewBag.Error</span>
             </div>
         </div>
 </form>

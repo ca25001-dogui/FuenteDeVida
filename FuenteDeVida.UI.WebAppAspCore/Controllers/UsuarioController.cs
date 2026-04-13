@@ -211,22 +211,30 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
         // POST: UsuarioController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Clave(int id, string claveActual, string nuevaClave)
+        public async Task<IActionResult> Clave(int id, string claveActual, string nuevaClave, string confirmarClave)
         {
             try
             {
                 if (string.IsNullOrWhiteSpace(claveActual))
                 {
                     ViewBag.Error = "Debe ingresar la clave actual";
-                    return View(new Usuario { IdUsuario = id });
+                    var usuarioActual = await usuarioBL.ObtenerPorIdAsync(new Usuario { IdUsuario = id });
+                    return View(usuarioActual);
                 }
 
                 if (string.IsNullOrWhiteSpace(nuevaClave))
                 {
                     ViewBag.Error = "Debe ingresar la nueva clave";
-                    return View(new Usuario { IdUsuario = id });
+                    var usuarioActual = await usuarioBL.ObtenerPorIdAsync(new Usuario { IdUsuario = id });
+                    return View(usuarioActual);
                 }
 
+                if (nuevaClave != confirmarClave)
+                {
+                    ViewBag.ErrorConfirmar = "Las contraseñas no coinciden";
+                    var usuarioActual = await usuarioBL.ObtenerPorIdAsync(new Usuario { IdUsuario = id });
+                    return View(usuarioActual);
+                }
                 var usuario = new Usuario
                 {
                     IdUsuario = id,
@@ -235,12 +243,19 @@ namespace FuenteDeVida.UI.WebAppAspCore.Controllers
 
                 await usuarioBL.ClaveAsync(usuario, claveActual);
 
-                return RedirectToAction("Index");
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                //Alerta que indica que se cambio la contraseña correctamente 
+                TempData["Mensaje"] = "Contraseña cambiada correctamente, inicia sesión nuevamente";
+
+                return RedirectToAction("Login", "Usuario");
+
             }
             catch (Exception ex)
             {
                 ViewBag.Error = ex.Message;
-                return View(new Usuario { IdUsuario = id });
+                var usuarioActual = await usuarioBL.ObtenerPorIdAsync(new Usuario { IdUsuario = id });
+                return View(usuarioActual);
             }
         }
     }

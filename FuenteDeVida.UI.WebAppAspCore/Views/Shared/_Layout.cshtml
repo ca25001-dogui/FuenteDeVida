@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/FuenteDeVida.UI.WebAppAspCore.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
     <header>
@@ -26,40 +27,40 @@
                         @if (User.Identity.IsAuthenticated)
                         {
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Inicio</a>
+                                <a class="nav-link text-dark" asp-controller="Home" asp-action="Index"><i class="fa-solid fa-house"></i>Inicio</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Rol" asp-action="Index">Rol</a>
+                                <a class="nav-link text-dark" asp-controller="Rol" asp-action="Index"><i class="fa-solid fa-user-shield"></i>Rol</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Usuario" asp-action="Index">Usuario</a>
+                                <a class="nav-link text-dark" asp-controller="Usuario" asp-action="Index"><i class="fa-solid fa-users"></i> Usuario</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Comunidad" asp-action="Index">Comunidad</a>
+                                <a class="nav-link text-dark" asp-controller="Comunidad" asp-action="Index"><i class="fa-solid fa-building"></i>Comunidad</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Factura" asp-action="Index">Factura</a>
+                                <a class="nav-link text-dark" asp-controller="Factura" asp-action="Index"><i class="fa-solid fa-file-invoice"></i>Factura</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Pago" asp-action="Index">Pago</a>
+                                <a class="nav-link text-dark" asp-controller="Pago" asp-action="Index"><i class="fa-solid fa-credit-card"></i>Pago</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Multa" asp-action="Index">Multa</a>
+                                <a class="nav-link text-dark" asp-controller="Multa" asp-action="Index"><i class="fa-solid fa-triangle-exclamation"></i>Multa</a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Cuota" asp-action="Index">Cuota</a>
+                                <a class="nav-link text-dark" asp-controller="Cuota" asp-action="Index"> <i class="fa-solid fa-money-bill"></i>Cuota</a>
                             </li>
 
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-controller="Usuario" asp-action="CerrarSesion">Cerrar Sesión</a>
+                                <a class="nav-link text-dark" asp-controller="Usuario" asp-action="CerrarSesion"><i class="fa-solid fa-right-from-bracket"></i>Cerrar Sesión</a>
                             </li>
                         }
                         else
